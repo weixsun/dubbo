@@ -30,6 +30,7 @@
         <spring-boot.version>3.0.0-SNAPSHOT</spring-boot.version>
         <!-- Uncomment spring_version property to check Spring 4.x compatibility -->
         <!-- <spring_version>4.3.30.RELEASE</spring_version> -->
+        <tomcat-embed_version>8.5.78</tomcat-embed_version>
     </properties>
 
     <dependencies>
@@ -152,6 +153,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat-embed_version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -243,6 +245,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
+    <profiles>
+        <profile>
+            <id>jdk17ge</id>
+            <activation>
+                <jdk>[17,)</jdk>
+            </activation>
+            <properties>
+                <tomcat-embed_version>10.1.1</tomcat-embed_version>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <testResources>
